@@ -39,7 +39,7 @@ export default async function AnalyticsFeedPage() {
                   </td>
                 </tr>
               ) : (
-                logs.map(log => (
+                logs.map((log: any) => (
                   <tr key={log.id} className="hover:bg-white/[0.02] transition-colors group">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                       {new Date(log.timestamp).toLocaleString()}

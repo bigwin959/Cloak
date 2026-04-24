@@ -15,7 +15,7 @@ export default async function DashboardOverview() {
   const countriesData = await prisma.log.groupBy({
     by: ['country'],
   });
-  const totalCountries = countriesData.filter(c => c.country !== 'Unknown').length;
+  const totalCountries = countriesData.filter((c: any) => c.country !== 'Unknown').length;
 
   const mobileRequests = await prisma.log.count({ where: { device: 'mobile' } });
   const mobilePercentage = totalRequests > 0 ? Math.round((mobileRequests / totalRequests) * 100) : 0;
@@ -28,7 +28,7 @@ export default async function DashboardOverview() {
 
   // Group logs by hour/minute string for chart mapping
   const chartMap = new Map();
-  recentLogs.forEach(log => {
+  recentLogs.forEach((log: any) => {
     const timeKey = new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     if (!chartMap.has(timeKey)) {
       chartMap.set(timeKey, { time: timeKey, hits: 0, bots: 0 });
@@ -106,7 +106,7 @@ export default async function DashboardOverview() {
           <h3 className="text-lg font-semibold mb-4">Top Executed Routes</h3>
           <ul className="space-y-4">
             {rulesData.length === 0 && <p className="text-sm text-gray-400">No routing execution data available.</p>}
-            {rulesData.map((data, i) => (
+            {rulesData.map((data: any, i: number) => (
               <li key={i} className="flex items-center justify-between p-3 rounded-lg bg-dark-bg/50 border border-dark-border">
                 <span className="text-sm font-medium font-mono truncate">{data.routeTaken}</span>
                 <span className="text-xs bg-brand-500/20 text-brand-400 px-2 py-1 rounded-md">{data._count} hits</span>
@@ -119,7 +119,7 @@ export default async function DashboardOverview() {
           <h3 className="text-lg font-semibold mb-4">Recent Edge Logs</h3>
           <div className="space-y-3">
              {feedLogs.length === 0 && <p className="text-sm text-gray-400">Awaiting edge logs.</p>}
-             {feedLogs.map(log => (
+             {feedLogs.map((log: any) => (
                <LogItem 
                  key={log.id} 
                  ip={log.ipHash.substring(0, 8) + '...'} 
