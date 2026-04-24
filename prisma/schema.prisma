@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// In this foundational phase, we use SQLite for local development
+datasource db {
+  provider = "sqlite"
+}
+
+model Rule {
+  id         String   @id @default(uuid())
+  name       String
+  conditions String   // JSON stringified conditions
+  action     String   // JSON stringified action (e.g. rewrite, redirect)
+  priority   Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Log {
+  id         String   @id @default(uuid())
+  timestamp  DateTime @default(now())
+  ipHash     String
+  country    String?
+  device     String?
+  routeTaken String
+  isBot      Boolean  @default(false)
+}
+
+model Experiment {
+  id           String   @id @default(uuid())
+  name         String
+  trafficSplit Int      // Percentage of traffic hitting variant B
+  variants     String   // JSON stringified variants
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
