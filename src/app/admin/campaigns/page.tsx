@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import CampaignCard from './CampaignCard';
 
 export const dynamic = 'force-dynamic';
 
@@ -87,27 +88,7 @@ export default async function CampaignsPage() {
              ) : (
                <div className="space-y-4">
                  {campaigns.map(camp => (
-                   <div key={camp.id} className="p-4 bg-slate-800 border border-slate-700 rounded-xl flex items-center justify-between group transition-all hover:bg-slate-800/80 hover:border-slate-600">
-                     <div>
-                       <div className="flex items-center gap-3 mb-1">
-                         <h4 className="font-semibold text-emerald-400">{camp.name}</h4>
-                         <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 flex items-center gap-1">
-                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Active
-                         </span>
-                       </div>
-                       <p className="text-sm font-mono text-slate-300 mb-3 bg-slate-900 inline-block px-2 py-1 rounded">/go/{camp.slug}</p>
-                       <div className="flex flex-col gap-1.5 text-xs text-slate-400 font-mono">
-                         <span className="flex items-center gap-2"><span className="text-emerald-500 font-bold bg-emerald-500/10 px-1 rounded">M</span> {camp.moneyUrl}</span>
-                         <span className="flex items-center gap-2"><span className="text-rose-400 font-bold bg-rose-500/10 px-1 rounded">C</span> {camp.cloakUrl}</span>
-                       </div>
-                     </div>
-                     <form action={deleteCampaign}>
-                       <input type="hidden" name="id" value={camp.id} />
-                       <button type="submit" className="px-3 py-2 text-xs font-semibold text-rose-400 bg-rose-400/10 hover:bg-rose-400/20 border border-rose-400/20 rounded-lg transition-colors opacity-0 group-hover:opacity-100">
-                         Archieve
-                       </button>
-                     </form>
-                   </div>
+                   <CampaignCard key={camp.id} camp={camp} deleteAction={deleteCampaign} />
                  ))}
                </div>
              )}

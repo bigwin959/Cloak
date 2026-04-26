@@ -51,8 +51,8 @@ export async function proxy(request: NextRequest) {
           // Telemetry
           await logHit(`CAMP_${slug.toUpperCase()}_${isHumanVerifiable ? 'MONEY' : 'CLOAK'}`, detectedBot);
 
-          // We use rewrite to act as a proxy keeping the URL untouched
-          return NextResponse.rewrite(targetExternalUrl);
+          // We use a classic 302 redirect for maximum tracking reliability
+          return NextResponse.redirect(targetExternalUrl);
         }
       }
     } catch (error) {
