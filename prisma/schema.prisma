@@ -40,3 +40,13 @@ model Experiment {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model Campaign {
+  id          String   @id @default(uuid())
+  slug        String   @unique // The tracking path (e.g., "fb-ad-1")
+  name        String   // "My Cool Offer Campaign"
+  moneyUrl    String   // "https://my-real-money-offer.com"
+  cloakUrl    String   // "https://my-safe-game.com"
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}

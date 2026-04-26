@@ -32,6 +32,10 @@ export default function AdminLayout({
                 <Home className="w-4 h-4 mr-3 text-brand-400" />
                 Dashboard Overview
               </Link>
+              <Link href="/admin/campaigns" className="flex items-center px-4 py-3 rounded-lg hover:bg-white/5 transition-colors text-sm font-medium">
+                <Route className="w-4 h-4 mr-3 text-emerald-400" />
+                Campaign Sets
+              </Link>
               <Link href="/admin/rules" className="flex items-center px-4 py-3 rounded-lg hover:bg-white/5 transition-colors text-sm font-medium">
                 <Route className="w-4 h-4 mr-3 text-brand-400" />
                 Routing Rules
